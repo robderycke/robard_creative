@@ -1,0 +1,179 @@
+// ==========================================================================
+// 1. SETTINGS & 2. TOOLS
+// ==========================================================================
+$primary:       #0d1e2d;
+$accent:        #2E4C6D;
+$white:         #ffffff;
+$light:         #f8f9fa;
+$transition-main: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+html {
+    scroll-behavior: smooth; // Zorgt voor de vloeiende overgang bij menu-klikken
+}
+
+// ==========================================================================
+// 6. COMPONENTS (BEM)
+// ==========================================================================
+
+// --- Service Cards ---
+.c-service-card {
+    background-color: $white;
+    border: 1px solid rgba($primary, 0.05);
+    border-radius: 1.5rem;
+    padding: 3rem 2rem;
+    transition: $transition-main;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    &__icon {
+        font-size: 3rem;
+        color: $accent;
+        margin-bottom: 1.5rem;
+        transition: $transition-main;
+    }
+
+    &__title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        font-size: 1.25rem;
+        color: $primary;
+        margin-bottom: 1.5rem;
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        padding-top: 1.5rem;
+        flex-grow: 1;
+
+        li {
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #555;
+
+            &::before {
+                content: "→";
+                color: $accent;
+                position: absolute;
+                left: 0;
+            }
+        }
+    }
+
+    &--accent {
+        border: 2px solid $accent;
+    }
+
+    &:hover {
+        background-color: $primary;
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+        .c-service-card__icon, 
+        .c-service-card__title,
+        .c-service-card__list li {
+            color: $white !important;
+        }
+
+        .c-service-card__list {
+            border-top-color: rgba(255, 255, 255, 0.1);
+            li::before { color: $white; }
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 2rem 1.5rem;
+    }
+}
+
+// --- Work Cards ---
+.c-work-card {
+    position: relative;
+    cursor: pointer;
+    background-color: $primary;
+    
+    &__image-wrapper {
+        position: relative;
+        overflow: hidden;
+        img {
+            transition: transform 1s $transition-main;
+            display: block;
+            width: 100%;
+        }
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba($primary, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: $transition-main;
+        backdrop-filter: blur(5px); // Modern frosted glass effect
+    }
+
+    &:hover {
+        img { transform: scale(1.1); }
+        .c-work-card__overlay { opacity: 1; }
+    }
+}
+
+// --- Pricing Cards ---
+.c-price-card {
+    transition: $transition-main;
+    
+    &.transform-scale {
+        @media (min-width: 992px) {
+            transform: scale(1.05);
+            z-index: 2;
+        }
+    }
+
+    &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+}
+
+// --- Contact Form ---
+.c-form {
+    .form-control, .form-select {
+        border-radius: 0.75rem;
+        padding: 0.75rem 1rem;
+        border: 1px solid rgba(0,0,0,0.1);
+        
+        &:focus {
+            box-shadow: 0 0 0 3px rgba($accent, 0.2);
+            border-color: $accent;
+            outline: none;
+        }
+    }
+}
+
+// ==========================================================================
+// 7. UTILITIES
+// ==========================================================================
+
+// De kern van je vraag: Royale en responsieve padding
+.u-py-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+    @media (min-width: 992px) {
+        padding-top: 10rem; // Royale padding voor premium uitstraling
+        padding-bottom: 10rem;
+    }
+}
+
+.u-bg-primary { background-color: $primary !important; }
+.u-divider { width: 60px; height: 4px; background: $accent; border-radius: 2px; }
+.u-mb-element { margin-bottom: 1.5rem; }
+.u-mb-section-title { margin-bottom: 4rem; }
